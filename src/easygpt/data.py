@@ -16,7 +16,7 @@ class CharTokenizer:
     """
 
     def __init__(self, text: str):
-        raise NotImplementedError("Exercise: CharTokenizer.__init__ (docs/part1/data.md)")
+        self.chars = list(text)
 
     @property
     def vocab_size(self) -> int:
@@ -24,11 +24,40 @@ class CharTokenizer:
 
     def encode(self, text: str) -> list[int]:
         """Return the list of ids of the characters of ``text``."""
-        raise NotImplementedError("Exercise: CharTokenizer.encode (docs/part1/data.md)")
+        
+        set_training_test = set(self.chars)
+        encoding = sorted(set_training_data)
+        encoded_text = []
+        N = len(text)
+        for i in range(N) :
+                c = text[i]
+                
+                try : 
+                    encoded_text.append(encoding.index(c))
+                
+                except : 
+                    raise KeyError('text contains {c} at index {i} which is not an element of the training data set. Sorry!'.format(c=c, i=i))
+        return encoded_text
 
     def decode(self, ids: list[int]) -> str:
         """Inverse of :meth:`encode`."""
-        raise NotImplementedError("Exercise: CharTokenizer.decode (docs/part1/data.md)")
+        
+        set_training_test = set(self.chars)
+        encoding = sorted(set_training_data)
+        decoded_text = ""
+        N = len(ids)
+
+        for i in range(N):
+            e = ids[i]
+            try : 
+                e_decoded = encoding[e]
+                decoded_text = decoded_text + e_decoded
+
+            except :
+                raise KeyError("The list contains {e} at index {i} which is not encoded by the training data! Sorry!".format(e=e, i=i))
+
+        return decoded_text
+                
 
     # -- serialization (given) ----------------------------------------------
     def to_dict(self) -> dict:
