@@ -16,7 +16,7 @@ class CharTokenizer:
     """
 
     def __init__(self, text: str):
-        self.chars = list(text)
+        self.chars = sorted(set(text))
 
     @property
     def vocab_size(self) -> int:
@@ -25,7 +25,7 @@ class CharTokenizer:
     def encode(self, text: str) -> list[int]:
         """Return the list of ids of the characters of ``text``."""
 
-        set_training_data = set(self.chars)
+        set_training_data = self.chars
         encoding = sorted(set_training_data)
         encoded_text = []
         N = len(text)
@@ -41,7 +41,7 @@ class CharTokenizer:
 
     def decode(self, ids: list[int]) -> str:
         """Inverse of :meth:`encode`."""
-        set_training_data = set(self.chars)
+        set_training_data = self.chars
         encoding = sorted(set_training_data)
         decoded_text = ""
         N = len(ids)
