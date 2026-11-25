@@ -30,7 +30,7 @@ class CharTokenizer:
         encoded_text = []
         N = len(text)
         for i in range(N) :
-            c = char(text[i])
+            c = text[i]
                 
             try : 
                 encoded_text.append(encoding.index(c))
